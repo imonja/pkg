@@ -4,10 +4,10 @@ go 1.21
 
 require (
 	github.com/confluentinc/confluent-kafka-go/v2 v2.3.0
-	google.golang.org/grpc v1.60.1
+	google.golang.org/grpc v1.61.0
 	google.golang.org/protobuf v1.32.0
-	gopkg.in/DataDog/dd-trace-go.v1 v1.59.0
-	gorm.io/driver/mysql v1.0.1
+	gopkg.in/DataDog/dd-trace-go.v1 v1.59.1
+	gorm.io/driver/mysql v1.5.2
 	gorm.io/driver/postgres v1.5.4
 	gorm.io/gorm v1.25.5
 )
@@ -16,7 +16,7 @@ require (
 	github.com/DataDog/appsec-internal-go v1.4.0 // indirect
 	github.com/DataDog/datadog-agent/pkg/obfuscate v0.50.2 // indirect
 	github.com/DataDog/datadog-agent/pkg/remoteconfig/state v0.50.2 // indirect
-	github.com/DataDog/datadog-go/v5 v5.4.0 // indirect
+	github.com/DataDog/datadog-go/v5 v5.5.0 // indirect
 	github.com/DataDog/go-libddwaf/v2 v2.2.3 // indirect
 	github.com/DataDog/go-sqllexer v0.0.10 // indirect
 	github.com/DataDog/go-tuf v1.0.2-0.5.2 // indirect
@@ -25,11 +25,11 @@ require (
 	github.com/Microsoft/go-winio v0.6.1 // indirect
 	github.com/cespare/xxhash/v2 v2.2.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
-	github.com/ebitengine/purego v0.5.1 // indirect
-	github.com/go-sql-driver/mysql v1.6.0 // indirect
+	github.com/ebitengine/purego v0.5.2 // indirect
+	github.com/go-sql-driver/mysql v1.7.1 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/pprof v0.0.0-20240117000934-35fc243c5815 // indirect
-	github.com/google/uuid v1.5.0 // indirect
+	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
@@ -58,6 +58,6 @@ require (
 	golang.org/x/time v0.5.0 // indirect
 	golang.org/x/tools v0.17.0 // indirect
 	golang.org/x/xerrors v0.0.0-20231012003039-104605ab7028 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20240116215550-a9fa1716bcac // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20240123012728-ef4313101c80 // indirect
 	inet.af/netaddr v0.0.0-20230525184311-b8eac61e914a // indirect
 )

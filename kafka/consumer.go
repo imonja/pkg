@@ -3,9 +3,9 @@ package kafka
 import (
 	"context"
 	"fmt"
-	"github.com/DataDog/appsec-internal-go/log"
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 	"google.golang.org/protobuf/proto"
+	"log"
 )
 
 const (
@@ -65,7 +65,7 @@ func (c *consumer) ConsumeMessage(ctx context.Context, topic string, msg proto.M
 				}
 				return msg, e, nil
 			case kafka.Error:
-				log.Errorf("kafka error: %v", e)
+				log.Printf("kafka error: %v", e)
 				// В случае ошибки Kafka продолжаем опрос (или можно выбрать другую стратегию)
 				continue
 			default:
