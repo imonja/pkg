@@ -65,13 +65,13 @@ func GetDialect(typeDb TypeDb, connString string) (gorm.Dialector, error) {
 }
 
 // CloseDBConnection closes a database connection
-func CloseDBConnection(dbConn *gorm.DB, logger *log.Logger) {
+func CloseDBConnection(dbConn *gorm.DB) {
 	sqlDB, err := dbConn.DB()
 	if err != nil {
-		logger.Printf("failed to get sqlDB from Gorm connection: %ы", err)
+		log.Printf("failed to get sqlDB from Gorm connection: %ы", err)
 		return
 	}
-	if err := sqlDB.Close(); err != nil {
-		logger.Printf("failed to close database connection: %ы", err)
+	if err = sqlDB.Close(); err != nil {
+		log.Printf("failed to close database connection: %ы", err)
 	}
 }
