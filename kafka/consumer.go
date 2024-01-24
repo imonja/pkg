@@ -28,10 +28,10 @@ type consumer struct {
 }
 
 // NewConsumer returns new consumer with schema registry
-func NewConsumer(kafkaURL string) (Consumer, error) {
+func NewConsumer(kafkaURL string, groupID string) (Consumer, error) {
 	c, err := kafka.NewConsumer(&kafka.ConfigMap{
 		"bootstrap.servers":  kafkaURL,
-		"group.id":           consumerGroupID,
+		"group.id":           groupID,
 		"session.timeout.ms": defaultSessionTimeout,
 		"enable.auto.commit": false,
 		"auto.offset.reset":  autoOffsetReset,
