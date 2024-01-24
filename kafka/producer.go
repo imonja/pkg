@@ -8,7 +8,7 @@ import (
 
 // Producer defines an interface for a Kafka message producer.
 type Producer interface {
-	ProduceMessage(ctx context.Context, msg proto.Message, topic string) error
+	ProduceMessage(ctx context.Context, msg proto.Message, topic string) (*kafka.Message, error)
 	Close()
 }
 
@@ -30,10 +30,10 @@ func NewProducer(kafkaURL string) (Producer, error) {
 }
 
 // ProduceMessage sends a Kafka message.
-func (p *producer) ProduceMessage(ctx context.Context, msg proto.Message, topic string) error {
+func (p *producer) ProduceMessage(ctx context.Context, msg proto.Message, topic string) (*kafka.Message, error) {
 	value, err := proto.Marshal(msg)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	message := &kafka.Message{
@@ -45,18 +45,18 @@ func (p *producer) ProduceMessage(ctx context.Context, msg proto.Message, topic 
 	defer close(deliveryChan)
 
 	if err = p.producer.Produce(message, deliveryChan); err != nil {
-		return err
+		return nil, err
 	}
 
 	select {
 	case <-ctx.Done():
-		return ctx.Err()
+		return nil, ctx.Err()
 	case e := <-deliveryChan:
-		m := e.(*kafka.Message)
-		if m.TopicPartition.Error != nil {
-			return m.TopicPartition.Error
+		kafkaMessage := e.(*kafka.Message)
+		if kafkaMessage.TopicPartition.Error != nil {
+			return nil, kafkaMessage.TopicPartition.Error
 		}
-		return nil
+		return kafkaMessage, nil
 	}
 }
 

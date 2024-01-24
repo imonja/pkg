@@ -3,6 +3,7 @@ package kafka
 import (
 	"context"
 	"fmt"
+	"github.com/DataDog/appsec-internal-go/log"
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 	"google.golang.org/protobuf/proto"
 )
@@ -17,6 +18,7 @@ const (
 // Consumer interface
 type Consumer interface {
 	ConsumeMessage(ctx context.Context, topic string, msg proto.Message) (proto.Message, *kafka.Message, error)
+	CommitMessage(msg *kafka.Message) error
 	Close() error
 }
 
@@ -63,6 +65,7 @@ func (c *consumer) ConsumeMessage(ctx context.Context, topic string, msg proto.M
 				}
 				return msg, e, nil
 			case kafka.Error:
+				log.Errorf("kafka error: %v", e)
 				// В случае ошибки Kafka продолжаем опрос (или можно выбрать другую стратегию)
 				continue
 			default:
@@ -70,6 +73,14 @@ func (c *consumer) ConsumeMessage(ctx context.Context, topic string, msg proto.M
 			}
 		}
 	}
+}
+
+func (c *consumer) CommitMessage(msg *kafka.Message) error {
+	if _, err := c.consumer.CommitMessage(msg); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // Close closes the consumer.
