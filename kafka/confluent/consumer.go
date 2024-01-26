@@ -1,4 +1,4 @@
-package kafka
+package kafka_confluent
 
 import (
 	"context"
@@ -9,7 +9,6 @@ import (
 )
 
 const (
-	consumerGroupID       = "console-consumer-1234567"
 	defaultSessionTimeout = 6000
 	pollTimeout           = 100
 	autoOffsetReset       = "earliest"
